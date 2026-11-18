@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="mn" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YOU — Personal Identity Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              bg: '#FAF8F5',
+              ink: '#18181B',
+              muted: '#71717A',
+              accent: '#B45309',
+              card: '#FFFFFF',
+              border: '#E4E4E7'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #18181B;
+    }
+    .glass-nav {
+      background: rgba(250, 248, 245, 0.85);
+      backdrop-filter: blur(12px);
+    }
+    .tab-active {
+      background-color: #18181B;
+      color: #FFFFFF;
+      border-color: #18181B;
+    }
+    .option-btn.selected {
+      background-color: #18181B;
+      color: #FFFFFF;
+      border-color: #18181B;
+    }
+    input[type="range"] {
+      accent-color: #18181B;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-stone-900 selection:text-white">
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-stone-200/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center font-serif font-bold text-sm tracking-wider">Y</span>
+        <span class="font-semibold tracking-tight text-lg">YOU <span class="text-xs font-normal text-stone-500 hidden sm:inline">— Identity Platform</span></span>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm text-stone-600 font-medium">
+        <a href="#modules" class="hover:text-stone-900 transition">6 Хэмжүүр</a>
+        <a href="#assessment" class="hover:text-stone-900 transition">Үнэгүй Тест</a>
+        <a href="#passport" class="hover:text-stone-900 transition">Миний Паспорт</a>
+      </nav>
+      <div class="flex items-center gap-2.5">
+        <button id="navUnlockBtn" onclick="openPaymentModal()" class="text-xs sm:text-sm font-medium px-3.5 py-2 rounded-full border border-stone-300 bg-white hover:bg-stone-100 transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-amber-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span>Хариу нээх</span>
+        </button>
+        <a href="#assessment" class="text-xs sm:text-sm font-medium px-4 py-2 rounded-full bg-stone-900 text-white hover:bg-stone-800 transition">
+          Тест эхлүүлэх
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-stone-200 text-xs font-medium text-stone-600 mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        6 чиглэлийн тестийг 100% үнэгүй бөглөөрэй
+      </div>
+      <h1 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight text-stone-900 leading-[1.12] mb-6">
+        Өөрийгөө бүх талаас нь таних <span class="italic font-normal text-amber-800">нэгдсэн платформ.</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-base sm:text-lg text-stone-600 leading-relaxed mb-9">
+        Сэтгэлзүй, оюун ухааны чадамжаас эхлээд арьсны онцлог, танд зохицох өнгөний палитр, хувцаслалтын хэв маягийг тань нэг дор оношилж, зөвхөн танд зориулсан <strong class="text-stone-900 font-medium">YOU Identity Passport</strong>-ийг бүтээнэ.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+        <a href="#assessment" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-stone-900 text-white font-medium text-sm hover:bg-stone-800 transition shadow-sm">
+          Үнэгүй оношилгоо эхлүүлэх →
+        </a>
+        <a href="#passport" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white border border-stone-300 text-stone-800 font-medium text-sm hover:bg-stone-50 transition">
+          Миний Паспорт харах
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Pillars Overview -->
+  <section id="modules" class="py-12 px-4 sm:px-6 border-y border-stone-200/80 bg-white/60">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
+        <div class="p-4 rounded-2xl bg-white border border-stone-200/90 shadow-sm">
+          <div class="text-xs font-semibold text-amber-800 uppercase tracking-wider mb-1">01 · Сэтгэлзүй</div>
+          <div class="font-bold text-stone-900 text-base">MBTI Төрөл</div>
+          <p class="text-xs text-stone-500 mt-1">Зан төлөв, шийдвэр гаргалт, эрч хүчний эх үүсвэр.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white border border-stone-200/90 shadow-sm">
+          <div class="text-xs font-semibold text-amber-800 uppercase tracking-wider mb-1">02 · Оюун ухаан</div>
+          <div class="font-bold text-stone-900 text-base">IQ Индекс</div>
+          <p class="text-xs text-stone-500 mt-1">Логик сэтгэлгээ, зүй тогтол таних хурд.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white border border-stone-200/90 shadow-sm">
+          <div class="text-xs font-semibold text-amber-800 uppercase tracking-wider mb-1">03 · Мэдрэмж</div>
+          <div class="font-bold text-stone-900 text-base">EQ Чадамж</div>
+          <p class="text-xs text-stone-500 mt-1">Өөрийгөө удирдах болон бусдыг ойлгох чадвар.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white border border-stone-200/90 shadow-sm">
+          <div class="text-xs font-semibold text-amber-800 uppercase tracking-wider mb-1">04 · Арчилгаа</div>
+          <div class="font-bold text-stone-900 text-base">Арьс арчилгаа</div>
+          <p class="text-xs text-stone-500 mt-1">Арьсны төрөлд тохирсон өглөө, оройн жор.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white border border-stone-200/90 shadow-sm">
+          <div class="text-xs font-semibold text-amber-800 uppercase tracking-wider mb-1">05 · Өнгө</div>
+          <div class="font-bold text-stone-900 text-base">Хувийн өнгө</div>
+          <p class="text-xs text-stone-500 mt-1">Улирлын өнгөний палитр ба металл зохицол.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white border border-stone-200/90 shadow-sm">
+          <div class="text-xs font-semibold text-amber-800 uppercase tracking-wider mb-1">06 · Хэв маяг</div>
+          <div class="font-bold text-stone-900 text-base">Хувцаслалт</div>
+          <p class="text-xs text-stone-500 mt-1">Капсул шүүгээ ба биеийн галбирт тохирох силуэт.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Assessment Studio -->
+  <section id="assessment" class="py-16 sm:py-24 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-amber-800">Интерактив Оношилгоо · Үнэгүй</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">Өөрийн мэдээллээ бөглөнө үү</h2>
+        </div>
+        <div class="flex items-center gap-3 bg-white px-4 py-2.5 rounded-2xl border border-stone-200 shadow-sm">
+          <div class="text-xs text-stone-500">Явц:</div>
+          <div class="w-28 h-2 bg-stone-100 rounded-full overflow-hidden">
+            <div id="progressBar" class="h-full bg-stone-900 transition-all duration-300" style="width: 16%"></div>
+          </div>
+          <div id="progressText" class="text-xs font-bold text-stone-900">1/6</div>
+        </div>
+      </div>
+
+      <!-- User Name Input -->
+      <div class="bg-white p-5 rounded-2xl border border-stone-200 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+        <div>
+          <label for="userNameInput" class="block text-sm font-semibold text-stone-900">Таны нэр (Паспорт дээр бичигдэх)</label>
+          <p class="text-xs text-stone-500">Нэрээ оруулснаар хувийн үнэмлэх тань автоматаар үүснэ.</p>
+        </div>
+        <input id="userNameInput" type="text" placeholder="Жишээ: Анужин" value="Зочин Хэрэглэгч" oninput="updatePassport()"
+          class="w-full sm:w-64 px-4 py-2.5 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-stone-900" />
+      </div>
+
+      <!-- Module Tabs -->
+      <div class="flex overflow-x-auto gap-2 pb-3 mb-6 no-scrollbar" id="moduleTabs">
+        <button onclick="switchTab(0)" class="tab-btn tab-active shrink-0 px-4 py-2.5 rounded-full border border-stone-300 text-xs sm:text-sm font-medium transition">1. MBTI</button>
+        <button onclick="switchTab(1)" class="tab-btn shrink-0 px-4 py-2.5 rounded-full border border-stone-300 bg-white text-stone-700 text-xs sm:text-sm font-medium hover:bg-stone-100 transition">2. IQ Тест</button>
+        <button onclick="switchTab(2)" class="tab-btn shrink-0 px-4 py-2.5 rounded-full border border-stone-300 bg-white text-stone-700 text-xs sm:text-sm font-medium hover:bg-stone-100 transition">3. EQ Мэдрэмж</button>
+        <button onclick="switchTab(3)" class="tab-btn shrink-0 px-4 py-2.5 rounded-full border border-stone-300 bg-white text-stone-700 text-xs sm:text-sm font-medium hover:bg-stone-100 transition">4. Арьс арчилгаа</button>
+        <button onclick="switchTab(4)" class="tab-btn shrink-0 px-4 py-2.5 rounded-full border border-stone-300 bg-white text-stone-700 text-xs sm:text-sm font-medium hover:bg-stone-100 transition">5. Хувийн өнгө</button>
+        <button onclick="switchTab(5)" class="tab-btn shrink-0 px-4 py-2.5 rounded-full border border-stone-300 bg-white text-stone-700 text-xs sm:text-sm font-medium hover:bg-stone-100 transition">6. Хувцаслалт</button>
+      </div>
+
+      <!-- Tab Panels Container -->
+      <div class="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 shadow-sm">
+        
+        <!-- TAB 0: MBTI -->
+        <div class="tab-panel" id="panel-0">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold text-stone-900">01. MBTI Зан төлөвийн оношилгоо</h3>
+            <p class="text-sm text-stone-500 mt-1">Доорх 4 хэмжүүр тус бүрээс өөрт илүү ойр хувилбарыг сонгоно уу.</p>
+          </div>
+          <div class="space-y-5">
+            <div>
+              <div class="text-xs font-semibold uppercase text-stone-400 mb-2">Эрч хүчээ хаанаас авдаг вэ?</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button type="button" onclick="selectOption('mbti_ei', 'E', this)" class="option-btn selected text-left p-4 rounded-2xl border border-stone-200 hover:border-stone-400 transition">
+                  <div class="font-semibold text-sm">Хүмүүстэй харилцаж, гадагш чиглэх (E)</div>
+                  <div class="text-xs opacity-75 mt-1">Олон хүнтэй орчинд эрч хүч сэргэдэг.</div>
+                </button>
+                <button type="button" onclick="selectOption('mbti_ei', 'I', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200 hover:border-stone-400 transition">
+                  <div class="font-semibold text-sm">Ганцаараа тайван байж цэнэглэгдэх (I)</div>
+                  <div class="text-xs opacity-75 mt-1">Дотоод ертөнц, нам гүм орчныг илүүд үздэг.</div>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-semibold uppercase text-stone-400 mb-2">Мэдээллийг хэрхэн хүлээж авдаг вэ?</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button type="button" onclick="selectOption('mbti_sn', 'S', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200 hover:border-stone-400 transition">
+                  <div class="font-semibold text-sm">Бодит баримт, туршлагад тулгуурлах (S)</div>
+                  <div class="text-xs opacity-75 mt-1">Нарийн ширийн зүйл, одоо цагт төвлөрдөг.</div>
+                </button>
+                <button type="button" onclick="selectOption('mbti_sn', 'N', this)" class="option-btn selected text-left p-4 rounded-2xl border border-stone-200 hover:border-stone-400 transition">
+                  <div class="font-semibold text-sm">Зөн совин, ирээдүйн боломжийг харах (N)</div>
+                  <div class="text-xs opacity-75 mt-1">Шинэ санаа, далд утга санааг эрэлхийлдэг.</div>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-semibold uppercase text-stone-400 mb-2">Шийдвэр гаргахдаа юуг чухалчилдаг вэ?</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button type="button" onclick="selectOption('mbti_tf', 'T', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200 hover:border-stone-400 transition">
+                  <div class="font-semibold text-sm">Логик дүн шинжилгээ, шударга зарчим (T)</div>
+                  <div class="text-xs opacity-75 mt-1">Шалтгаан ба үр дагаврыг тооцоолдог.</div>
+                </button>
+                <button type="button" onclick="selectOption('mbti_tf', 'F', this)" class="option-btn selected text-left p-4 rounded-2xl border border-stone-200 hover:border-stone-400 transition">
+                  <div class="font-semibold text-sm">Хүмүүсийн мэдрэмж, үнэт зүйл (F)</div>
+                  <div class="text-xs opacity-75 mt-1">Эв нэгдэл, бусдын сэтгэлийг бодолцдог.</div>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-semibold uppercase text-stone-400 mb-2">Амьдралын хэв маяг тань ямар вэ?</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button type="button" onclick="selectOption('mbti_jp', 'J', this)" class="option-btn selected text-left p-4 rounded-2xl border border-stone-200 hover:border-stone-400 transition">
+                  <div class="font-semibold text-sm">Төлөвлөгөөтэй, эмх цэгцтэй (J)</div>
+                  <div class="text-xs opacity-75 mt-1">Урьдчилан төлөвлөж, дуусгах дуртай.</div>
+                </button>
+                <button type="button" onclick="selectOption('mbti_jp', 'P', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200 hover:border-stone-400 transition">
+                  <div class="font-semibold text-sm">Уян хатан, чөлөөтэй (P)</div>
+                  <div class="text-xs opacity-75 mt-1">Нөхцөл байдалд зохицож, шинэ зүйлд нээлттэй.</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 1: IQ -->
+        <div class="tab-panel hidden" id="panel-1">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold text-stone-900">02. IQ Логик сэтгэлгээний сорил</h3>
+            <p class="text-sm text-stone-500 mt-1">Дараах 3 логик бодлогыг бодож зөв хариултыг сонгоно уу.</p>
+          </div>
+          <div class="space-y-6">
+            <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200/80">
+              <div class="font-semibold text-sm mb-3">1. Тоон дарааллыг гүйцээнэ үү: 2, 6, 12, 20, 30, ?</div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <button type="button" onclick="selectIQ(0, 36, this)" class="option-btn py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm font-medium">36</button>
+                <button type="button" onclick="selectIQ(0, 40, this)" class="option-btn py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm font-medium">40</button>
+                <button type="button" onclick="selectIQ(0, 42, this)" class="option-btn py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm font-medium">42</button>
+                <button type="button" onclick="selectIQ(0, 44, this)" class="option-btn py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm font-medium">44</button>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200/80">
+              <div class="font-semibold text-sm mb-3">2. Бүх сарнай цэцэг. Зарим цэцэг хурдан ганддаг. Тэгвэл:</div>
+              <div class="grid grid-cols-1 gap-2.5">
+                <button type="button" onclick="selectIQ(1, 'wrong1', this)" class="option-btn text-left py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm">Бүх сарнай хурдан ганддаг</button>
+                <button type="button" onclick="selectIQ(1, 'correct', this)" class="option-btn text-left py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm">Зарим сарнай хурдан ганддаг байх магадлалтай</button>
+                <button type="button" onclick="selectIQ(1, 'wrong2', this)" class="option-btn text-left py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm">Ямар ч сарнай ганддаггүй</button>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200/80">
+              <div class="font-semibold text-sm mb-3">3. 5 машин 5 минутад 5 ширхэг эд анги үйлдвэрлэдэг бол 100 машин 100 эд ангийг хэдэн минутад үйлдвэрлэх вэ?</div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <button type="button" onclick="selectIQ(2, 100, this)" class="option-btn py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm font-medium">100 минут</button>
+                <button type="button" onclick="selectIQ(2, 20, this)" class="option-btn py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm font-medium">20 минут</button>
+                <button type="button" onclick="selectIQ(2, 5, this)" class="option-btn py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm font-medium">5 минут</button>
+                <button type="button" onclick="selectIQ(2, 1, this)" class="option-btn py-2.5 px-4 rounded-xl border border-stone-300 bg-white text-sm font-medium">1 минут</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: EQ -->
+        <div class="tab-panel hidden" id="panel-2">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold text-stone-900">03. EQ Сэтгэл хөдлөлийн чадамж</h3>
+            <p class="text-sm text-stone-500 mt-1">1 (Бага) -ээс 10 (Маш өндөр) хүртэл өөрийгөө үнэлнэ үү.</p>
+          </div>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between text-sm font-medium mb-2">
+                <span>Өөрийн сэтгэл хөдлөлийг таньж, удирдах чадвар</span>
+                <span id="eqVal1" class="font-bold text-amber-800">8 / 10</span>
+              </div>
+              <input type="range" min="1" max="10" value="8" oninput="updateEQ(1, this.value)" class="w-full cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-sm font-medium mb-2">
+                <span>Бусдын оронд өөрийгөө тавьж ойлгох (Эмпати)</span>
+                <span id="eqVal2" class="font-bold text-amber-800">9 / 10</span>
+              </div>
+              <input type="range" min="1" max="10" value="9" oninput="updateEQ(2, this.value)" class="w-full cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-sm font-medium mb-2">
+                <span>Стресс, зөрчилдөөний үед тайван харилцах</span>
+                <span id="eqVal3" class="font-bold text-amber-800">7 / 10</span>
+              </div>
+              <input type="range" min="1" max="10" value="7" oninput="updateEQ(3, this.value)" class="w-full cursor-pointer">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: SKINCARE -->
+        <div class="tab-panel hidden" id="panel-3">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold text-stone-900">04. Арьсны онцлог ба арчилгаа</h3>
+            <p class="text-sm text-stone-500 mt-1">Арьсны үндсэн төрөл болон гол тулгамддаг асуудлаа сонгоно уу.</p>
+          </div>
+          <div class="space-y-5">
+            <div>
+              <div class="text-xs font-semibold uppercase text-stone-400 mb-2">Арьсны төрөл</div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <button type="button" onclick="selectOption('skinType', 'Хуурай', this)" class="option-btn p-3.5 rounded-2xl border border-stone-200 text-sm font-medium">Хуурай</button>
+                <button type="button" onclick="selectOption('skinType', 'Тослог', this)" class="option-btn p-3.5 rounded-2xl border border-stone-200 text-sm font-medium">Тослог</button>
+                <button type="button" onclick="selectOption('skinType', 'Холимог', this)" class="option-btn selected p-3.5 rounded-2xl border border-stone-200 text-sm font-medium">Холимог</button>
+                <button type="button" onclick="selectOption('skinType', 'Эмзэг', this)" class="option-btn p-3.5 rounded-2xl border border-stone-200 text-sm font-medium">Эмзэг</button>
+              </div>
+            </div>
+            <div>
+              <div class="text-xs font-semibold uppercase text-stone-400 mb-2">Гол анхаарах асуудал</div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button type="button" onclick="selectOption('skinGoal', 'Чийгшил алдалт', this)" class="option-btn selected p-3.5 rounded-2xl border border-stone-200 text-sm font-medium">Чийгшил алдалт</button>
+                <button type="button" onclick="selectOption('skinGoal', 'Нүхжилт ба батга', this)" class="option-btn p-3.5 rounded-2xl border border-stone-200 text-sm font-medium">Нүхжилт ба батга</button>
+                <button type="button" onclick="selectOption('skinGoal', 'Нөсөө толбо, өнгө сэргээх', this)" class="option-btn p-3.5 rounded-2xl border border-stone-200 text-sm font-medium">Нөсөө толбо, өнгө сэргээх</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: PERSONAL COLOR -->
+        <div class="tab-panel hidden" id="panel-4">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold text-stone-900">05. Хувийн өнгөний тодорхойлолт</h3>
+            <p class="text-sm text-stone-500 mt-1">Бугуйн дотор талын судас болон арьсны туяагаа сонгоно уу.</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <button type="button" onclick="selectOption('colorSeason', 'Spring Warm (Хавар)', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200">
+              <div class="flex items-center gap-2 font-semibold text-sm">
+                <span class="w-4 h-4 rounded-full bg-amber-300 border border-stone-300"></span>
+                Spring Warm (Дулаан Хавар)
+              </div>
+              <div class="text-xs opacity-75 mt-1">Арьс шаргалдуу гэгээлэг, алтлаг гоёл илүү зохидог.</div>
+            </button>
+            <button type="button" onclick="selectOption('colorSeason', 'Summer Cool (Зун)', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200">
+              <div class="flex items-center gap-2 font-semibold text-sm">
+                <span class="w-4 h-4 rounded-full bg-rose-200 border border-stone-300"></span>
+                Summer Cool (Зөөлөн Зун)
+              </div>
+              <div class="text-xs opacity-75 mt-1">Арьс ягаандуу туяатай, зөөлөн пастель өнгө гэрэлтүүлдэг.</div>
+            </button>
+            <button type="button" onclick="selectOption('colorSeason', 'Autumn Deep (Намар)', this)" class="option-btn selected text-left p-4 rounded-2xl border border-stone-200">
+              <div class="flex items-center gap-2 font-semibold text-sm">
+                <span class="w-4 h-4 rounded-full bg-amber-800 border border-stone-300"></span>
+                Autumn Deep (Гүн Намар)
+              </div>
+              <div class="text-xs opacity-75 mt-1">Дулаан хүрэн, олив ногоон, терракотта өнгө төгс зохицдог.</div>
+            </button>
+            <button type="button" onclick="selectOption('colorSeason', 'Winter Clear (Өвөл)', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200">
+              <div class="flex items-center gap-2 font-semibold text-sm">
+                <span class="w-4 h-4 rounded-full bg-indigo-950 border border-stone-300"></span>
+                Winter Clear (Тод Өвөл)
+              </div>
+              <div class="text-xs opacity-75 mt-1">Хар, цагаан, тод хөх зэрэг эрс тэс өнгө, мөнгөлөг гоёл зохидог.</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 5: STYLING -->
+        <div class="tab-panel hidden" id="panel-5">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold text-stone-900">06. Хувцаслалт ба Капсул хэв маяг</h3>
+            <p class="text-sm text-stone-500 mt-1">Таны өдөр тутмын амьдралын хэмнэлд аль хэв маяг илүү нийцэх вэ?</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <button type="button" onclick="selectOption('styleArchetype', 'Quiet Luxury & Minimal', this)" class="option-btn selected text-left p-4 rounded-2xl border border-stone-200">
+              <div class="font-semibold text-sm">Quiet Luxury & Minimal</div>
+              <div class="text-xs opacity-75 mt-1">Цэвэр эсгүүр, логогүй чанартай материал, нейтрал өнгө.</div>
+            </button>
+            <button type="button" onclick="selectOption('styleArchetype', 'Smart Casual & Chic', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200">
+              <div class="font-semibold text-sm">Smart Casual & Chic</div>
+              <div class="text-xs opacity-75 mt-1">Ажил хэрэгч пиджакийг жийнс эсвэл пүүзтэй хослуулсан чөлөөт загвар.</div>
+            </button>
+            <button type="button" onclick="selectOption('styleArchetype', 'Urban Street & Modern', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200">
+              <div class="font-semibold text-sm">Urban Street & Modern</div>
+              <div class="text-xs opacity-75 mt-1">Сул (oversized) эсгүүр, давхарласан хувцаслалт, орчин үеийн өнгө аяс.</div>
+            </button>
+            <button type="button" onclick="selectOption('styleArchetype', 'Classic Tailored', this)" class="option-btn text-left p-4 rounded-2xl border border-stone-200">
+              <div class="font-semibold text-sm">Classic Tailored</div>
+              <div class="text-xs opacity-75 mt-1">Биед яг таарсан сонгодог хослол, цаг хугацаанд үл хуучрах дэгжин байдал.</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons inside Assessment -->
+        <div class="mt-8 pt-6 border-t border-stone-100 flex items-center justify-between">
+          <button type="button" id="prevTabBtn" onclick="changeTab(-1)" class="px-5 py-2.5 rounded-full border border-stone-300 text-sm font-medium text-stone-700 hover:bg-stone-50 disabled:opacity-40" disabled>
+            ← Өмнөх
+          </button>
+          <button type="button" id="nextTabBtn" onclick="changeTab(1)" class="px-6 py-2.5 rounded-full bg-stone-900 text-white text-sm font-medium hover:bg-stone-800 transition">
+            Дараагийнх →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOU IDENTITY PASSPORT (LOCKED UNTIL BANK TRANSFER) -->
+  <section id="passport" class="py-16 sm:py-24 px-4 sm:px-6 bg-stone-900 text-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-amber-400">Нэгдсэн Үр Дүн</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-1">YOU Identity Passport</h2>
+        </div>
+        <div id="statusBadge" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-xs font-medium text-amber-300">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Тайлан түгжигдсэн · Төлбөр төлж нээнэ үү
+        </div>
+      </div>
+
+      <!-- Passport Card Wrapper -->
+      <div class="relative rounded-3xl bg-gradient-to-br from-stone-800 via-stone-900 to-black border border-white/15 p-6 sm:p-10 shadow-2xl overflow-hidden">
+        
+        <!-- LOCK OVERLAY (Shown when locked) -->
+        <div id="lockOverlay" class="absolute inset-0 z-20 backdrop-blur-md bg-stone-950/75 flex flex-col items-center justify-center p-6 text-center">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-300 mb-4">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mb-2">Таны 6 чиглэлийн хариу бэлэн боллоо</h3>
+          <p class="max-w-md text-sm text-stone-300 leading-relaxed mb-6">
+            MBTI төрөл, IQ & EQ оноо, арьс арчилгааны өглөө/оройн жор, хувийн өнгөний палитр болон капсул хувцаслалтын бүрэн тайлангаа нэг удаагийн төлбөрөөр нээж аваарай.
+          </p>
+          <div class="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 mb-6">
+            <div class="text-xs text-stone-400">Нэг удаагийн төлбөр (Сарын хураамжгүй)</div>
+            <div class="text-3xl font-bold text-white mt-0.5">19,900₮</div>
+          </div>
+          <button onclick="openPaymentModal()" class="px-8 py-4 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm transition shadow-lg">
+            Дансаар төлбөр төлж хариугаа нээх →
+          </button>
+        </div>
+
+        <!-- ACTUAL PASSPORT CONTENT (Blurred when locked) -->
+        <div id="passportContent" class="select-none blur-sm transition-all duration-500">
+          <!-- Header of Passport -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+            <div>
+              <div class="text-xs uppercase tracking-widest text-stone-400">REPUBLIC OF SELF · IDENTITY PASSPORT</div>
+              <div id="passName" class="font-serif text-3xl font-bold text-white mt-1">Зочин Хэрэглэгч</div>
+            </div>
+            <div class="text-left sm:text-right">
+              <div class="text-xs text-stone-400">ID ДУГААР</div>
+              <div id="passId" class="font-mono text-sm text-amber-300">YOU-2026-8492</div>
+            </div>
+          </div>
+
+          <!-- 6 Metrics Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8">
+            <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+              <div class="text-xs text-stone-400 uppercase">01 · MBTI Зан төлөв</div>
+              <div id="resMbti" class="text-2xl font-bold text-amber-300 mt-1">ENFJ</div>
+              <p id="resMbtiDesc" class="text-xs text-stone-300 mt-2 leading-relaxed">Хүмүүсийг урамшуулагч, алсын хараатай манлайлагч.</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+              <div class="text-xs text-stone-400 uppercase">02 · IQ Логик чадамж</div>
+              <div id="resIq" class="text-2xl font-bold text-emerald-300 mt-1">118 (Өндөр)</div>
+              <p class="text-xs text-stone-300 mt-2 leading-relaxed">Зүй тогтол болон хийсвэр логик сэтгэлгээ сайтай.</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+              <div class="text-xs text-stone-400 uppercase">03 · EQ Сэтгэл хөдлөл</div>
+              <div id="resEq" class="text-2xl font-bold text-sky-300 mt-1">80% · Тэнцвэртэй</div>
+              <p class="text-xs text-stone-300 mt-2 leading-relaxed">Эмпати болон харилцааны мэдрэмж өндөр хөгжсөн.</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+              <div class="text-xs text-stone-400 uppercase">04 · Арьс арчилгааны жор</div>
+              <div id="resSkin" class="text-lg font-bold text-white mt-1">Холимог · Чийгшил алдалт</div>
+              <p id="resSkinRoutine" class="text-xs text-stone-300 mt-2 leading-relaxed">AM: Зөөлөн гель + Hyaluronic Acid + SPF50. PM: Niacinamide + Ceramide тос.</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+              <div class="text-xs text-stone-400 uppercase">05 · Хувийн өнгө</div>
+              <div id="resColor" class="text-lg font-bold text-white mt-1">Autumn Deep (Гүн Намар)</div>
+              <div id="resSwatches" class="flex items-center gap-2 mt-3">
+                <span class="w-6 h-6 rounded-full bg-[#7C2D12] border border-white/30"></span>
+                <span class="w-6 h-6 rounded-full bg-[#3F6212] border border-white/30"></span>
+                <span class="w-6 h-6 rounded-full bg-[#B45309] border border-white/30"></span>
+                <span class="w-6 h-6 rounded-full bg-[#F5F5DC] border border-white/30"></span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+              <div class="text-xs text-stone-400 uppercase">06 · Хувцаслалт</div>
+              <div id="resStyle" class="text-lg font-bold text-white mt-1">Quiet Luxury & Minimal</div>
+              <p id="resStyleDesc" class="text-xs text-stone-300 mt-2 leading-relaxed">Ноолууран цамц, шулуун эсгүүртэй өмд, цэвэрхэн тренч цув.</p>
+            </div>
+          </div>
+
+          <!-- Share / Copy Button -->
+          <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-xs text-stone-400">Таны нэгдсэн үр дүн бүрэн нээгдсэн байна.</div>
+            <button onclick="copyPassportSummary()" class="px-6 py-2.5 rounded-full bg-white text-stone-900 font-semibold text-xs sm:text-sm hover:bg-stone-200 transition">
+              Үр дүнг хуулж авах (Copy)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANK TRANSFER PAYMENT MODAL -->
+  <div id="paymentModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-white text-stone-900 w-full max-w-md rounded-3xl p-6 sm:p-7 shadow-2xl border border-stone-200 relative">
+      <button onclick="closePaymentModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600">
+        ✕
+      </button>
+
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-semibold mb-3">
+        Дансаар шилжүүлэх
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-stone-900">Бүрэн тайлан нээх</h3>
+      <p class="text-xs text-stone-500 mt-1">Доорх данс руу төлбөрөө шилжүүлээд гүйлгээний утгаа заавал бичнэ үү.</p>
+
+      <!-- Bank Details Card -->
+      <div class="mt-5 p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3 text-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-stone-500 text-xs">Банк:</span>
+          <span class="font-semibold text-stone-900">Хаан Банк (Khan Bank)</span>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-stone-200/70">
+          <div>
+            <div class="text-stone-500 text-xs">Дансны дугаар:</div>
+            <div id="bankAccNum" class="font-mono font-bold text-base text-stone-900">5012 3456 78</div>
+          </div>
+          <button onclick="copyText('5012345678', this)" class="px-3 py-1.5 rounded-lg bg-white border border-stone-300 text-xs font-medium hover:bg-stone-100 transition">
+            Хуулах
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-stone-200/70">
+          <div>
+            <div class="text-stone-500 text-xs">Хүлээн авагч:</div>
+            <div class="font-semibold text-stone-900">YOU IDENTITY LLC</div>
+          </div>
+          <button onclick="copyText('YOU IDENTITY LLC', this)" class="px-3 py-1.5 rounded-lg bg-white border border-stone-300 text-xs font-medium hover:bg-stone-100 transition">
+            Хуулах
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-stone-200/70">
+          <div>
+            <div class="text-stone-500 text-xs">Шилжүүлэх дүн:</div>
+            <div class="font-bold text-base text-stone-900">19,900₮</div>
+          </div>
+          <button onclick="copyText('19900', this)" class="px-3 py-1.5 rounded-lg bg-white border border-stone-300 text-xs font-medium hover:bg-stone-100 transition">
+            Хуулах
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-stone-200/70 bg-amber-50/70 -mx-2 px-2 py-2 rounded-xl">
+          <div>
+            <div class="text-amber-800 text-xs font-medium">Гүйлгээний утга (Заавал бичих):</div>
+            <div id="transferRefCode" class="font-mono font-bold text-base text-amber-900">YOU-8492</div>
+          </div>
+          <button onclick="copyRefCode(this)" class="px-3 py-1.5 rounded-lg bg-amber-600 text-white text-xs font-medium hover:bg-amber-700 transition">
+            Хуулах
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-4 text-[11px] text-stone-500 leading-relaxed">
+        * Шилжүүлэг хийсний дараа доорх товчийг дарж баталгаажуулна уу. Таны хариу тэр дороо нээгдэнэ.
+      </div>
+
+      <button id="confirmTransferBtn" onclick="confirmBankTransfer()" class="mt-5 w-full py-3.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-semibold text-sm transition">
+        Шилжүүлэг хийсэн · Хариугаа нээх
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-xl bg-stone-900 text-white text-xs font-medium shadow-lg border border-white/10">
+    Хуулагдлаа!
+  </div>
+
+  <footer class="py-10 px-4 text-center text-xs text-stone-500 border-t border-stone-200">
+    © 2026 YOU — Personal Identity Platform. Бүх эрх хуулиар хамгаалагдсан.
+  </footer>
+
+  <script>
+    // State
+    let currentTab = 0;
+    let isUnlocked = false;
+    const refNumber = Math.floor(1000 + Math.random() * 9000);
+
+    const state = {
+      mbti_ei: 'E',
+      mbti_sn: 'N',
+      mbti_tf: 'F',
+      mbti_jp: 'J',
+      iqAnswers: [null, null, null],
+      eq: [8, 9, 7],
+      skinType: 'Холимог',
+      skinGoal: 'Чийгшил алдалт',
+      colorSeason: 'Autumn Deep (Намар)',
+      styleArchetype: 'Quiet Luxury & Minimal'
+    };
+
+    const mbtiDescriptions = {
+      ENFJ: 'Хүмүүсийг урамшуулагч, алсын хараатай манлайлагч.',
+      INFJ: 'Гүн сэтгэгч, зөн совин сайтай, утга учир эрэлхийлэгч.',
+      ENTJ: 'Шийдэмгий стратегич, зорилгодоо хүрэх өндөр тэмүүлэлтэй.',
+      INTJ: 'Бие даасан аналитик сэтгэгч, системтэй төлөвлөгч.',
+      ENFP: 'Бүтээлч, урам зоригоор дүүрэн, шинэ боломжийг нээгч.',
+      INFP: 'Мэдрэмжтэй, үнэт зүйлдээ үнэнч, уран сэтгэмжтэй.',
+      ENTP: 'Шинийг санаачлагч, сэргэлэн оюун ухаантай мэтгэлцэгч.',
+      INTP: 'Логик сэтгэгч, онол ба мэдлэгийг гүнзгий судлагч.',
+      ESTJ: 'Зохион байгуулалт сайтай, хариуцлагатай удирдагч.',
+      ISTJ: 'Найдвартай, баримтад тулгуурладаг, тууштай.',
+      ESFJ: 'Халамжтай, хамт олны уур амьсгалыг бүрдүүлэгч.',
+      ISFJ: 'Үнэнч, анхаарал халамжтай, нарийн мэдрэмжтэй.',
+      ESTP: 'Эрч хүчтэй, бодит үйлдэлд төвлөрсөн шийдвэр гаргагч.',
+      ISTP: 'Тайван, практик сэтгэлгээтэй асуудал шийдэгч.',
+      ESFP: 'Цоглог, мэдрэмжтэй, хором бүрийг таашаагч.',
+      ISFP: 'Урлагийн мэдрэмжтэй, даруухан, эрх чөлөөт сэтгэлгээтэй.'
+    };
+
+    const colorPalettes = {
+      'Spring Warm (Хавар)': ['#FBBF24', '#FB7185', '#34D399', '#FEF3C7'],
+      'Summer Cool (Зун)': ['#93C5FD', '#F9A8D4', '#C4B5FD', '#E2E8F0'],
+      'Autumn Deep (Намар)': ['#7C2D12', '#3F6212', '#B45309', '#F5F5DC'],
+      'Winter Clear (Өвөл)': ['#1E1B4B', '#BE123C', '#FFFFFF', '#09090B']
+    };
+
+    const styleGuides = {
+      'Quiet Luxury & Minimal': 'Ноолууран цамц, шулуун эсгүүртэй өмд, цэвэрхэн тренч цув.',
+      'Smart Casual & Chic': 'Бүтэцлэгдсэн пиджак, цагаан футболка, өндөр суудалтай жийнс.',
+      'Urban Street & Modern': 'Oversized хүрэм, карго эсвэл өргөн өмд, минимал пүүз.',
+      'Classic Tailored': 'Биед яг таарсан хослол, торгон цамц, сонгодог лофер гутал.'
+    };
+
+    // Init
+    document.getElementById('passId').textContent = `YOU-2026-${refNumber}`;
+    document.getElementById('transferRefCode').textContent = `YOU-${refNumber}`;
+    updatePassport();
+
+    function switchTab(index) {
+      currentTab = index;
+      document.querySelectorAll('.tab-panel').forEach((p, i) => {
+        p.classList.toggle('hidden', i !== index);
+      });
+      document.querySelectorAll('.tab-btn').forEach((b, i) => {
+        if (i === index) {
+          b.classList.add('tab-active');
+          b.classList.remove('bg-white', 'text-stone-700');
+        } else {
+          b.classList.remove('tab-active');
+          b.classList.add('bg-white', 'text-stone-700');
+        }
+      });
+
+      document.getElementById('prevTabBtn').disabled = index === 0;
+      document.getElementById('nextTabBtn').textContent = index === 5 ? 'Үр дүн харах ↓' : 'Дараагийнх →';
+
+      const pct = Math.round(((index + 1) / 6) * 100);
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressText').textContent = `${index + 1}/6`;
+    }
+
+    function changeTab(dir) {
+      if (currentTab === 5 && dir === 1) {
+        document.getElementById('passport').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+      const next = Math.max(0, Math.min(5, currentTab + dir));
+      switchTab(next);
+    }
+
+    function selectOption(key, value, btn) {
+      state[key] = value;
+      const siblings = btn.parentElement.querySelectorAll('.option-btn');
+      siblings.forEach(s => s.classList.remove('selected'));
+      btn.classList.add('selected');
+      updatePassport();
+    }
+
+    function selectIQ(qIndex, val, btn) {
+      state.iqAnswers[qIndex] = val;
+      const siblings = btn.parentElement.querySelectorAll('.option-btn');
+      siblings.forEach(s => s.classList.remove('selected'));
+      btn.classList.add('selected');
+      updatePassport();
+    }
+
+    function updateEQ(idx, val) {
+      state.eq[idx - 1] = parseInt(val);
+      document.getElementById(`eqVal${idx}`).textContent = `${val} / 10`;
+      updatePassport();
+    }
+
+    function updatePassport() {
+      const name = document.getElementById('userNameInput').value.trim() || 'Зочин Хэрэглэгч';
+      document.getElementById('passName').textContent = name;
+
+      // MBTI
+      const mbti = state.mbti_ei + state.mbti_sn + state.mbti_tf + state.mbti_jp;
+      document.getElementById('resMbti').textContent = mbti;
+      document.getElementById('resMbtiDesc').textContent = mbtiDescriptions[mbti] || '';
+
+      // IQ
+      let correct = 0;
+      if (state.iqAnswers[0] === 42) correct++;
+      if (state.iqAnswers[1] === 'correct') correct++;
+      if (state.iqAnswers[2] === 5) correct++;
+      const iqScore = 100 + correct * 10;
+      const iqLabel = iqScore >= 120 ? 'Маш өндөр' : iqScore >= 110 ? 'Өндөр' : 'Дундаж';
+      document.getElementById('resIq').textContent = `${iqScore} (${iqLabel})`;
+
+      // EQ
+      const eqSum = state.eq.reduce((a, b) => a + b, 0);
+      const eqPct = Math.round((eqSum / 30) * 100);
+      const eqLabel = eqPct >= 80 ? 'Өндөр мэдрэмжтэй' : eqPct >= 60 ? 'Тэнцвэртэй' : 'Хөгжүүлэх боломжтой';
+      document.getElementById('resEq').textContent = `${eqPct}% · ${eqLabel}`;
+
+      // Skincare
+      document.getElementById('resSkin').textContent = `${state.skinType} · ${state.skinGoal}`;
+      let routine = 'AM: Зөөлөн цэвэрлэгч + Чийгшүүлэгч серум + SPF50. PM: Нөхөн сэргээх тос.';
+      if (state.skinGoal === 'Нүхжилт ба батга') {
+        routine = 'AM: BHA цэвэрлэгч + Niacinamide + Oil-free SPF50. PM: Salicylic Acid + Хөнгөн гель.';
+      } else if (state.skinGoal === 'Нөсөө толбо, өнгө сэргээх') {
+        routine = 'AM: Vitamin C серум + SPF50. PM: Alpha Arbutin + Ceramide чийгшүүлэгч.';
+      }
+      document.getElementById('resSkinRoutine').textContent = routine;
+
+      // Personal Color
+      document.getElementById('resColor').textContent = state.colorSeason;
+      const colors = colorPalettes[state.colorSeason] || colorPalettes['Autumn Deep (Намар)'];
+      document.getElementById('resSwatches').innerHTML = colors.map(c =>
+        `<span class="w-6 h-6 rounded-full border border-white/30" style="background:${c}"></span>`
+      ).join('');
+
+      // Style
+      document.getElementById('resStyle').textContent = state.styleArchetype;
+      document.getElementById('resStyleDesc').textContent = styleGuides[state.styleArchetype] || '';
+    }
+
+    // Payment Modal Controls
+    function openPaymentModal() {
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePaymentModal() {
+      const modal = document.getElementById('paymentModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function copyText(text, btn) {
+      navigator.clipboard.writeText(text);
+      const orig = btn.textContent;
+      btn.textContent = 'Хууллаа ✓';
+      showToast('Мэдээлэл хуулагдлаа');
+      setTimeout(() => btn.textContent = orig, 1500);
+    }
+
+    function copyRefCode(btn) {
+      copyText(`YOU-${refNumber}`, btn);
+    }
+
+    function confirmBankTransfer() {
+      const btn = document.getElementById('confirmTransferBtn');
+      btn.disabled = true;
+      btn.textContent = 'Шалгаж байна...';
+
+      setTimeout(() => {
+        isUnlocked = true;
+        closePaymentModal();
+
+        // Unlock UI
+        document.getElementById('lockOverlay').classList.add('hidden');
+        const content = document.getElementById('passportContent');
+        content.classList.remove('blur-sm', 'select-none');
+
+        const badge = document.getElementById('statusBadge');
+        badge.className = 'inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-xs font-medium text-emerald-300';
+        badge.innerHTML = '✓ Төлбөр баталгаажсан · Бүрэн тайлан нээгдлээ';
+
+        document.getElementById('navUnlockBtn').classList.add('hidden');
+        document.getElementById('passport').scrollIntoView({ behavior: 'smooth' });
+        showToast('Таны YOU Identity Passport амжилттай нээгдлээ!');
+      }, 900);
+    }
+
+    function copyPassportSummary() {
+      if (!isUnlocked) {
+        openPaymentModal();
+        return;
+      }
+      const name = document.getElementById('passName').textContent;
+      const mbti = document.getElementById('resMbti').textContent;
+      const iq = document.getElementById('resIq').textContent;
+      const eq = document.getElementById('resEq').textContent;
+      const skin = document.getElementById('resSkin').textContent;
+      const color = document.getElementById('resColor').textContent;
+      const style = document.getElementById('resStyle').textContent;
+
+      const summary = `YOU — Identity Passport (${name})
+• MBTI: ${mbti}
+• IQ: ${iq}
+• EQ: ${eq}
+• Арьс: ${skin}
+• Хувийн өнгө: ${color}
+• Хувцаслалт: ${style}`;
+      navigator.clipboard.writeText(summary);
+      showToast('Таны паспорт хуулагдлаа!');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 2500);
+    }
+  </script>
+</body>
+</html>
